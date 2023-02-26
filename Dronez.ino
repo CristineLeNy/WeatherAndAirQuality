@@ -21,7 +21,7 @@ float duration;
 
 //variables 
 //sensor data
-float co2[20], temp[20], humidity[20],distance[20],dusty[20]; 
+float co2[20], temp[20], humidity[20],distance[20],dusty[20],time[20]; 
 //counter 
 int i=0; 
 
@@ -100,6 +100,15 @@ void scd30()
 void printData()
 {
   delay(20);
+  Serial.println("Time Stamps: ");
+  for (int j=0; j<20; j++)
+  {
+    Serial.print(String(time[j]) + " ");
+    delay(10);
+  }
+  Serial.println();
+
+  delay(20);
   Serial.println("Temperature Data: ");
   for (int j=0; j<20; j++)
   {
@@ -143,13 +152,17 @@ void printData()
 
 void loop() 
 {
-  delay(250);
-  dust();
-  delay(250);
-  ultrasonic();
-  delay(250);
-  scd30();
-  delay(2000);
-  i++;
-  printData();
+  if (i<20)
+  {
+    time[i]=millis();
+    delay(250);
+    dust();
+    delay(250);
+    ultrasonic();
+    delay(250);
+    scd30();
+    delay(2000);
+    i++;
+    printData();
+  }
 }
