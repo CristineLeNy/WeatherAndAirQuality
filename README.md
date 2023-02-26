@@ -1,4 +1,5 @@
 # WeatherAndAirQuality
+By Cristine Le Ny, Matthew McBurney, Brandon Walsh
 Project for Profhacks 2023
 
 This project aims to help people to be able to detect the air quality of any space and be
