@@ -7,8 +7,6 @@
 #include <String.h>
 #include "SparkFun_SCD30_Arduino_Library.h"
 
-
-
 //sensors
 SCD30 airSensor;
 const int measurePin = A3;
@@ -66,7 +64,7 @@ void ultrasonic ()
 {
   if (i<20)
   {
-     // Clears the trigPin
+  // Clears the trigPin
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   // Sets the trigPin on HIGH state for 10 micro seconds
@@ -75,7 +73,7 @@ void ultrasonic ()
   duration = pulseIn(echoPin, HIGH);
   // Calculating the distance
   distance[i] = duration * 0.034 / 2;
-    delay(250);
+  delay(100);
   }
 }
 void scd30()
@@ -147,22 +145,16 @@ void printData()
 }
 
 void loop() 
-{
-  char input= Serial.read();
-  if (input == 'p')
-  {
-    printData();
-  }
+{  
   if (i<20)
   {
     time[i]=millis();
-    delay(250);
-    dust();
-    delay(250);
     ultrasonic();
-    delay(250);
+    dust();
     scd30();
-    delay(2000);
     i++;
+    printData();
+    delay(2000);
   }
+     
 }
