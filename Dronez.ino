@@ -146,6 +146,12 @@ void printData()
 
 void loop() 
 {  
+  char input = Serial.read();
+  if (input== 'p')
+  {
+    printData();
+  }
+  
   if (i<20)
   {
     time[i]=millis();
@@ -153,7 +159,7 @@ void loop()
     dust();
     scd30();
     i++;
-    printData();
+
     delay(2000);
   }
      
