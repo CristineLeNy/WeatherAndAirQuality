@@ -25,7 +25,7 @@ int i=0;
 
 void setup() 
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
   //dust sensor setup 
   pinMode (ledPower, OUTPUT);
 
