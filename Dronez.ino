@@ -80,10 +80,9 @@ void ultrasonic ()
 }
 void scd30()
 {
-  if (airSensor.dataAvailable())
-  {
     if (i<20)
     {
+      delay(2000);
       //get co2 reading
       co2[i]=airSensor.getCO2();
 
@@ -92,9 +91,6 @@ void scd30()
 
       //get humidity
       humidity[i]=airSensor.getHumidity();
-
-      delay(2000);
-    }
   }    
 }
 void printData()
@@ -109,7 +105,7 @@ void printData()
   Serial.println();
 
   delay(20);
-  Serial.println("Temperature Data: ");
+  Serial.println("Temperature Data (C): ");
   for (int j=0; j<20; j++)
   {
     Serial.print(String(temp[j]) + " ");
@@ -117,7 +113,7 @@ void printData()
   }
   Serial.println();
 
-  Serial.println("CO2 Data: ");
+  Serial.println("CO2 Data (ppm): ");
   for (int j=0; j<20; j++)
   {
     Serial.print(String(co2[j]) + " ");
@@ -125,7 +121,7 @@ void printData()
   }
   Serial.println();
 
-  Serial.println("Humidity Data: ");
+  Serial.println("Humidity Data (%): ");
   for (int j=0; j<20; j++)
   {
     Serial.print(String(humidity[j]) + " ");
@@ -152,6 +148,11 @@ void printData()
 
 void loop() 
 {
+  char input= Serial.read();
+  if (input == 'p')
+  {
+    printData();
+  }
   if (i<20)
   {
     time[i]=millis();
@@ -163,6 +164,5 @@ void loop()
     scd30();
     delay(2000);
     i++;
-    printData();
   }
 }
